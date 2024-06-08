@@ -64,3 +64,9 @@ To include a line space in the output, use `<br/>` tag, or wrap the statements i
 Implement the functionality for displaying the information for a single phonebook entry. The url for getting the data for a person with the id 5 should be <http://localhost:3001/api/persons/5>
 
 If an entry for the given id is not found, the server has to respond with the appropriate status code.
+
+## 3.4: Phonebook backend step 4
+
+Implement functionality that makes it possible to delete a single phonebook entry by making an HTTP DELETE request to the unique URL of that phonebook entry.
+
+Test that your functionality works with either Postman or the Visual Studio Code REST client.
