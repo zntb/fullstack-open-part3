@@ -140,3 +140,13 @@ Create a README.md at the root of your repository, and add a link to your online
 **NOTE:** as it was said, you should deploy the BACKEND to the cloud service. If you are using Fly.io the commands should be run in the root directory of the backend (that is, in the same directory where the backend package.json is). In case of using Render, the backend must be in the root of your repository.
 
 You shall NOT be deploying the frontend directly at any stage of this part. It is just backend repository that is deployed throughout the whole part, nothing else.
+
+### 3.11 Full Stack Phonebook
+
+Generate a production build of your frontend, and add it to the Internet application using the method introduced in this part.
+
+**NB** If you use Render, make sure the directory _dist_ is not ignored by git on the backend.
+
+Also, make sure that the frontend still works locally (in development mode when started with command `npm run dev`).
+
+If you have problems getting the app working make sure that your directory structure matches [the example app](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3).
