@@ -218,3 +218,15 @@ Person.find({}).then((persons) => {
 ```
 
 **NB:** If you define a model with the name _Person_, mongoose will automatically name the associated collection as _people_.
+
+## Exercises 3.13.-3.14
+
+The following exercises are pretty straightforward, but if your frontend stops working with the backend, then finding and fixing the bugs can be quite interesting.
+
+### 3.13: Phonebook database, step 1
+
+Change the fetching of all phonebook entries so that the data is _fetched from the database_.
+
+Verify that the frontend works after the changes have been made.
+
+In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](https://fullstackopen.com/en/part3/saving_data_to_mongo_db#database-configuration-into-its-own-module).
