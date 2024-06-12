@@ -69,6 +69,14 @@ app.post('/api/persons', (request, response) => {
   });
 });
 
+app.delete('/api/persons/:id', (request, response, next) => {
+  Person.findByIdAndDelete(request.params.id)
+    .then(() => {
+      response.status(204).end();
+    })
+    .catch((error) => next(error));
+});
+
 app.use(unknownEndpoint);
 
 const PORT = process.env.PORT || 3001;

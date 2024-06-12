@@ -236,3 +236,11 @@ In the following exercises, write all Mongoose-specific code into its own module
 Change the backend so that new numbers are _saved to the database_. Verify that your frontend still works after the changes.
 
 At this stage, you can ignore whether there is already a person in the database with the same name as the person you are adding.
+
+## Exercises 3.15.-3.18
+
+### 3.15: Phonebook database, step 3
+
+Change the backend so that deleting phonebook entries is reflected in the database.
+
+Verify that the frontend still works after making the changes.
