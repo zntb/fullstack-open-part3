@@ -107,7 +107,10 @@ const App = () => {
                 person.id !== existingPerson.id ? person : returnedPerson
               )
             );
-
+            setSuccessMessage(`Updated ${newName}'s number`);
+            setTimeout(() => {
+              setSuccessMessage(null);
+            }, 3000);
             setNewName('');
             setNewNumber('');
           })
@@ -137,6 +140,10 @@ const App = () => {
         })
         .catch((error) => {
           console.error('Error creating person:', error);
+          setErrorMessage(error.response.data.error);
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 3000);
         });
     }
   };
