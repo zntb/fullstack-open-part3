@@ -230,3 +230,9 @@ Change the fetching of all phonebook entries so that the data is _fetched from t
 Verify that the frontend works after the changes have been made.
 
 In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](https://fullstackopen.com/en/part3/saving_data_to_mongo_db#database-configuration-into-its-own-module).
+
+### 3.14: Phonebook database, step 2
+
+Change the backend so that new numbers are _saved to the database_. Verify that your frontend still works after the changes.
+
+At this stage, you can ignore whether there is already a person in the database with the same name as the person you are adding.
