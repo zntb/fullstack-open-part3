@@ -271,7 +271,7 @@ Inspecting an individual phonebook entry from the browser should look like this:
 
 Expand the validation so that the name stored in the database has to be at least three characters long.
 
-Expand the frontend so that it displays some form of error message when a validation error occurs. Error handling can be implemented by adding a `catch `block as shown below:
+Expand the frontend so that it displays some form of error message when a validation error occurs. Error handling can be implemented by adding a `catch`block as shown below:
 
 ```js
 personService
@@ -303,3 +303,13 @@ Add validation to your phonebook application, which will make sure that phone nu
 Use a [Custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) to implement the second part of the validation.
 
 If an HTTP POST request tries to add a person with an invalid phone number, the server should respond with an appropriate status code and error message.
+
+### 3.21 Deploying the database backend to production
+
+Generate a new "full stack" version of the application by creating a new production build of the frontend, and copying it to the backend repository. Verify that everything works locally by using the entire application from the address <http://localhost:3001/>.
+
+Push the latest version to Fly.io/Render and verify that everything works there as well.
+
+**NOTE:** you should deploy the BACKEND to the cloud service. If you are using Fly.io the commands should be run in the root directory of the backend (that is, in the same directory where the backend package.json is). In case of using Render, the backend must be in the root of your repository.
+
+You shall NOT be deploying the frontend directly at any stage of this part. It is just backend repository that is deployed throughout the whole part, nothing else.
