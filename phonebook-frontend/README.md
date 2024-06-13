@@ -290,3 +290,16 @@ You can display the default error message returned by Mongoose, even though they
 ![phonebook5](./assets/phonebook5.png)
 
 **NB:** On update operations, mongoose validators are off by default. [Read the documentation](https://mongoosejs.com/docs/validation.html) to determine how to enable them.
+
+## 3.20\*: Phonebook database, step 8
+
+Add validation to your phonebook application, which will make sure that phone numbers are of the correct form. A phone number must:
+
+- have length of 8 or more
+- be formed of two parts that are separated by -, the first part has two or three numbers and the second part also consists of numbers
+  - eg. 09-1234556 and 040-22334455 are valid phone numbers
+  - eg. 1234556, 1-22334455 and 10-22-334455 are invalid
+
+Use a [Custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) to implement the second part of the validation.
+
+If an HTTP POST request tries to add a person with an invalid phone number, the server should respond with an appropriate status code and error message.
