@@ -8,7 +8,7 @@ const Person = require('./models/person');
 app.use(cors());
 app.use(express.json());
 
-morgan.token('body', (request, response) =>
+morgan.token('body', (request) =>
   request.method === 'POST' || request.method === 'PUT'
     ? JSON.stringify(request.body)
     : ''

@@ -8,7 +8,8 @@
     "build:ui": "rm -rf dist && cd ../phonebook-frontend && npm run build && cp -r dist ",
     "build:dev": "@powershell Remove-Item -Recurse -Force dist && cd ../phonebook-frontend && npm run build && @powershell Copy-Item dist -Recurse ../phonebook-backend",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,10 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.4.0",
+    "@stylistic/eslint-plugin-js": "^2.1.0",
+    "eslint": "^9.4.0",
+    "globals": "^15.4.0",
     "nodemon": "^3.1.3"
   }
 }
