@@ -116,9 +116,7 @@ const App = () => {
           })
           .catch((error) => {
             console.error('Error updating person:', error);
-            setErrorMessage(
-              `Information of ${newName} has already been removed from server`
-            );
+            setErrorMessage(error.response.data.error);
             setTimeout(() => {
               setErrorMessage(null);
             }, 3000);

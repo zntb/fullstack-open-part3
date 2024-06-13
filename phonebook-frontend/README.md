@@ -264,3 +264,29 @@ Also update the handling of the _api/persons/:id_ and info routes to use the dat
 Inspecting an individual phonebook entry from the browser should look like this:
 
 ![phonebook4](./assets/phonebook4.png)
+
+## Exercises 3.19.-3.21
+
+### 3.19\*: Phonebook database, step 7
+
+Expand the validation so that the name stored in the database has to be at least three characters long.
+
+Expand the frontend so that it displays some form of error message when a validation error occurs. Error handling can be implemented by adding a `catch `block as shown below:
+
+```js
+personService
+    .create({ ... })
+    .then(createdPerson => {
+      // ...
+    })
+    .catch(error => {
+      // this is the way to access the error message
+      console.log(error.response.data.error)
+    })
+```
+
+You can display the default error message returned by Mongoose, even though they are not as readable as they could be:
+
+![phonebook5](./assets/phonebook5.png)
+
+**NB:** On update operations, mongoose validators are off by default. [Read the documentation](https://mongoosejs.com/docs/validation.html) to determine how to enable them.
