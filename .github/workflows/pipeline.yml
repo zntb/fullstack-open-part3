@@ -45,7 +45,7 @@ jobs:
       - name: Health Check
         run: |
           echo "Waiting for server to start..."
-          sleep 30
+          sleep 60
           echo "Checking health of deployed app..."
           response=$(curl --fail https://fullstack-open-part3-ozn9.onrender.com/healthz)
           if [ "$response" == "ok" ]; then
