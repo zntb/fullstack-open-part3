@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const mongoose = require('mongoose');
 
 mongoose.set('strictQuery', false);
@@ -10,7 +11,7 @@ mongoose
   .then(() => {
     console.log('connected to MongoDB');
   })
-  .catch((error) => {
+  .catch(error => {
     console.log('error connecting to MongoDB:', error.message);
   });
 
@@ -19,7 +20,7 @@ const phoneValidator = {
     const regex = /^\d{2,3}-\d+$/;
     return regex.test(v) && v.length >= 8;
   },
-  message: (props) => `${props.value} is not a valid phone number!`,
+  message: props => `${props.value} is not a valid phone number!`,
 };
 
 const personSchema = new mongoose.Schema({

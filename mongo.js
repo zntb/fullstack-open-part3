@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const mongoose = require('mongoose');
 
 const password = process.argv[2];
@@ -22,7 +23,7 @@ mongoose
       mongoose.connection.close();
     }
   })
-  .catch((error) => {
+  .catch(error => {
     console.log('error connecting to MongoDB:', error.message);
   });
 
@@ -46,9 +47,9 @@ function addEntry(name, number) {
 }
 
 function listAllEntries() {
-  return Person.find({}).then((persons) => {
+  return Person.find({}).then(persons => {
     console.log('phonebook:');
-    persons.forEach((person) => {
+    persons.forEach(person => {
       console.log(`${person.name} ${person.number}`);
     });
     mongoose.connection.close();
