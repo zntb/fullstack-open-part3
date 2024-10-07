@@ -1,0 +1,38 @@
+name: Scheduled Health Check
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'
+
+jobs:
+  health_check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run actions/checkout@v4
+        uses: actions/checkout@v4
+
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v4
+        with:
+          url: https://fullstack-open-part3-ozn9.onrender.com/healthz
+          follow-redirect: false
+          max-attempts: 3
+          retry-delay: 5s
+          retry-all: false
+
+      - name: Notify success
+        uses: stegzilla/discord-notify@v4
+        if: success()
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: Health check passed!
+          message: 'The health check for the https://fullstack-open-part3-ozn9.onrender.com/ succeeded.'
+
+      - name: Notify failure
+        uses: stegzilla/discord-notify@v4
+        if: failure()
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: Health check failed!
+          message: 'The health check for https://fullstack-open-part3-ozn9.onrender.com/ failed.'
