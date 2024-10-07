@@ -1,18 +1,18 @@
 /* eslint-disable no-console */
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-const password = process.argv[2];
-const name = process.argv[3];
-const number = process.argv[4];
+const name = process.argv[2];
+const number = process.argv[3];
 
-const url = `mongodb+srv://zntb:${password}@opencourse.dp4llgl.mongodb.net/phonebook-app?retryWrites=true&w=majority&appName=opencourse`;
+const url = process.env.MONGODB_URI;
 
 mongoose.set('strictQuery', false);
 
 mongoose
   .connect(url)
   .then(() => {
-    console.log('connected to MongoDB');
+    console.log('Connected to MongoDB');
 
     if (!name && !number) {
       return listAllEntries();
@@ -24,7 +24,7 @@ mongoose
     }
   })
   .catch(error => {
-    console.log('error connecting to MongoDB:', error.message);
+    console.log('Error connecting to MongoDB:', error.message);
   });
 
 const personSchema = new mongoose.Schema({
@@ -35,22 +35,19 @@ const personSchema = new mongoose.Schema({
 const Person = mongoose.model('Person', personSchema);
 
 function addEntry(name, number) {
-  const person = new Person({
-    name,
-    number,
-  });
+  const person = new Person({ name, number });
 
   return person.save().then(() => {
-    console.log(`added ${name} number ${number} to phonebook`);
+    console.log(`Added ${name} number ${number} to phonebook`);
     return listAllEntries();
   });
 }
 
 function listAllEntries() {
   return Person.find({}).then(persons => {
-    console.log('phonebook:');
+    console.log('Phonebook:');
     persons.forEach(person => {
-      console.log(`${person.name} ${person.number}`);
+      console.log(`${person.name}: ${person.number}`);
     });
     mongoose.connection.close();
   });
