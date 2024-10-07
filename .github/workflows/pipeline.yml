@@ -23,7 +23,68 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install && cd ./frontend && npm install
 
       - name: Run linter
         run: npm run lint
+
+      - name: Build the application
+        run: npm run build:dev
+
+      - name: Start application in the background
+        run: npm run start-prod &
+
+      - name: Health Check
+        run: |
+          echo "Waiting for server to start..."
+          sleep 30
+          echo "Checking health of deployed app..."
+          response=$(curl --fail https://fullstack-open-part3-ozn9.onrender.com/healthz)
+          if [ "$response" == "ok" ]; then
+            echo "Health check passed!"
+          else
+            echo "Health check failed!"
+            exit 1
+          fi
+
+      - name: Trigger deployment on Render
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+
+      - name: Notify success
+        uses: stegzilla/discord-notify@v4
+        if: success()
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: A new version of the Phonebook application deployed!
+          message: 'Deployed to https://fullstack-open-part3-ozn9.onrender.com by **${{ github.actor }}**'
+          include_image: true
+          avatar_url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+          username: GitHub PR Notifier
+
+      - name: Notify failure
+        uses: stegzilla/discord-notify@v4
+        if: failure()
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: Deployment failed!
+          message: 'Commit **${{ github.event.head_commit.url }}** by **${{ github.event.head_commit.author.username }}**'
+          include_image: true
+          avatar_url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+          username: GitHub PR Notifier
+
+  tag_release:
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), 'skip') }}
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.71.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: patch
+          RELEASE_BRANCHES: main
