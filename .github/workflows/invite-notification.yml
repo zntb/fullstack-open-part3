@@ -1,0 +1,20 @@
+name: Collaboration Invite Notification
+
+on:
+  push:
+    branches:
+      - new-feature
+
+jobs:
+  notify_reviewer:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Collaboration Invite to Reviewer
+        uses: stegzilla/discord-notify@v4
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: Collaboration Invite
+          message: 'Hi mluukkai, could you please review my pull request? Here is the link to collaborate on the repository: [Invite Link](https://github.com/zntb/fullstack-open-part3/invitations). Please review the pull request created by **${{ github.actor }}**.'
+          avatar_url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+          username: GitHub PR Notifier
